@@ -7,7 +7,7 @@ use std::time::Duration;
 
 #[derive(Debug, Clone)]
 pub struct GOLContainer {
-    game: Vec<Vec<GOLCellularAutomata>>,
+    pub game: Vec<Vec<GOLCellularAutomata>>,
 }
 
 impl GOLContainer {
@@ -87,7 +87,7 @@ impl GOLContainer {
                 now += 1;
             }
 
-            thread::sleep(Duration::from_millis(600));
+            thread::sleep(Duration::from_millis(20));
             clear_cons();
         }
     }
@@ -107,7 +107,35 @@ impl GOLContainer {
         (alive, dead)
     }
 
-    pub fn push_vec(self: &mut Self, state: Vec<State>) -> () {
+    fn gen_border_lines(n: usize) -> Vec<GOLCellularAutomata> {
+        let mut stock: Vec<GOLCellularAutomata> = Vec::new();
 
+        for _ in 0..n {
+            stock.push(GOLCellularAutomata::new(State::BORDER));
+        }
+
+        stock
+    }
+
+    pub fn push_line(self: &mut Self, line: Vec<State>, is_last: bool) -> () {
+        if self.game.len() == 0 {
+            println!("{} to add.", line.len()+2);
+            self.game.push(GOLContainer::gen_border_lines(line.len() + 2));
+        } else {
+            let mut stock: Vec<GOLCellularAutomata> = Vec::new();
+            stock.push(GOLCellularAutomata::new(State::BORDER));
+
+            for i in 0..line.len() {
+                stock.push(GOLCellularAutomata::new(line[i]));
+            }
+
+            stock.push(GOLCellularAutomata::new(State::BORDER));
+
+            self.game.push(stock);
+        }
+
+        if is_last {
+            self.game.push(GOLContainer::gen_border_lines(self.game[0].len()));
+        }
     }
 }
