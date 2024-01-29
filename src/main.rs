@@ -26,5 +26,5 @@ fn main() {
     container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], false);
     container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], true);
 
-    container.run(0, 20);
+    container.run(10, 20);
 }

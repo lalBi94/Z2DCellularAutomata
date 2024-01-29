@@ -7,7 +7,7 @@ use std::time::Duration;
 
 #[derive(Debug, Clone)]
 pub struct GOLContainer {
-    pub game: Vec<Vec<GOLCellularAutomata>>,
+    game: Vec<Vec<GOLCellularAutomata>>,
 }
 
 impl GOLContainer {
@@ -29,6 +29,28 @@ impl GOLContainer {
                 GOLContainer { game: container }
             }
             None => GOLContainer { game: Vec::new() },
+        }
+    }
+
+    pub fn push_line(self: &mut Self, line: Vec<State>, is_last: bool) -> () {
+        if self.game.len() == 0 {
+            println!("{} to add.", line.len()+2);
+            self.game.push(GOLContainer::gen_border_lines(line.len() + 2));
+        } else {
+            let mut stock: Vec<GOLCellularAutomata> = Vec::new();
+            stock.push(GOLCellularAutomata::new(State::BORDER));
+
+            for i in 0..line.len() {
+                stock.push(GOLCellularAutomata::new(line[i]));
+            }
+
+            stock.push(GOLCellularAutomata::new(State::BORDER));
+
+            self.game.push(stock);
+        }
+
+        if is_last {
+            self.game.push(GOLContainer::gen_border_lines(self.game[0].len()));
         }
     }
 
@@ -95,23 +117,6 @@ impl GOLContainer {
         }
     }
 
-    fn gen_stat(self: &Self) -> (usize, usize) {
-        let mut dead: usize = 0;
-        let mut alive: usize = 0;
-
-        for i in 0..self.game.len() {
-            for j in 0..self.game[i].len() {
-                match self.game[i][j].get_state() {
-                    State::ALIVE => alive += 1,
-                    State::DEAD => dead += 1,
-                    _ => ()
-                }
-            }
-        }
-
-        (alive, dead)
-    }
-
     fn get_info(self: &Self, of: Vec<(Neighbors, GOLCellularAutomata)>) -> (usize, usize) {
         let mut alive: usize = 0;
         let mut dead: usize = 0;
@@ -137,25 +142,20 @@ impl GOLContainer {
         stock
     }
 
-    pub fn push_line(self: &mut Self, line: Vec<State>, is_last: bool) -> () {
-        if self.game.len() == 0 {
-            println!("{} to add.", line.len()+2);
-            self.game.push(GOLContainer::gen_border_lines(line.len() + 2));
-        } else {
-            let mut stock: Vec<GOLCellularAutomata> = Vec::new();
-            stock.push(GOLCellularAutomata::new(State::BORDER));
+    fn gen_stat(self: &Self) -> (usize, usize) {
+        let mut dead: usize = 0;
+        let mut alive: usize = 0;
 
-            for i in 0..line.len() {
-                stock.push(GOLCellularAutomata::new(line[i]));
+        for i in 0..self.game.len() {
+            for j in 0..self.game[i].len() {
+                match self.game[i][j].get_state() {
+                    State::ALIVE => alive += 1,
+                    State::DEAD => dead += 1,
+                    _ => ()
+                }
             }
-
-            stock.push(GOLCellularAutomata::new(State::BORDER));
-
-            self.game.push(stock);
         }
 
-        if is_last {
-            self.game.push(GOLContainer::gen_border_lines(self.game[0].len()));
-        }
+        (alive, dead)
     }
 }
