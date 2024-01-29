@@ -14,15 +14,6 @@ impl GOLCellularAutomata {
         self.state
     }
 
-    pub fn is_equal(self: &Self, other: &GOLCellularAutomata) -> bool {
-        let my: State = self.state;
-
-        match (*other).state {
-            my => true,
-            _ => false
-        }
-    }
-
     pub fn change_state(self: &mut Self, by: State) -> () {
         self.state = by
     }

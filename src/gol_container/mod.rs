@@ -32,11 +32,11 @@ impl GOLContainer {
         }
     }
 
-    pub fn run(self: &mut Self, step: usize) -> () {
+    pub fn run(self: &mut Self, step: usize, speed_milis: u64) -> () {
         let mut now: usize = 1;
 
         loop {
-            println!("(Step. {}) CRTL+C to quit.\n", now);
+            println!("CRTL+C to quit.\n(Step. {}) {}ms\n", now, speed_milis);
 
             for i in 1..self.game.len() - 1 {
                 for j in 1..self.game[i].len() - 1 {
@@ -81,18 +81,38 @@ impl GOLContainer {
                 println!();
             }
 
+            let stats: (usize, usize) = self.gen_stat();
+                println!("[ALIVE: {}, DEAD: {}]", stats.0, stats.1);
+
             if now == step && step > 0 {
                 return;
             } else {
                 now += 1;
             }
 
-            thread::sleep(Duration::from_millis(20));
+            thread::sleep(Duration::from_millis(speed_milis));
             clear_cons();
         }
     }
 
-    pub fn get_info(self: &Self, of: Vec<(Neighbors, GOLCellularAutomata)>) -> (usize, usize) {
+    fn gen_stat(self: &Self) -> (usize, usize) {
+        let mut dead: usize = 0;
+        let mut alive: usize = 0;
+
+        for i in 0..self.game.len() {
+            for j in 0..self.game[i].len() {
+                match self.game[i][j].get_state() {
+                    State::ALIVE => alive += 1,
+                    State::DEAD => dead += 1,
+                    _ => ()
+                }
+            }
+        }
+
+        (alive, dead)
+    }
+
+    fn get_info(self: &Self, of: Vec<(Neighbors, GOLCellularAutomata)>) -> (usize, usize) {
         let mut alive: usize = 0;
         let mut dead: usize = 0;
 
