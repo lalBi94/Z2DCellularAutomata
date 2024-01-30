@@ -27,9 +27,7 @@ There are two solutions: use `GOLContainer::push_line(line:Vec<State>, is_last: 
 ```rust
 container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], false);
 container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], false);
-
 container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::ALIVE, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], false);
-
 container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD, State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], false);
 container.push_line(vec![State::DEAD, State::DEAD, State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD, State::DEAD, State::DEAD, State::DEAD, State::DEAD], false);
 container.push_line(vec![State::DEAD, State::DEAD, State::ALIVE, State::DEAD, State::ALIVE, State::ALIVE, State::ALIVE, State::DEAD, State::ALIVE, State::DEAD, State::DEAD, State::DEAD], true);
@@ -52,7 +50,7 @@ let list: Vec<Vec<State>> = vec![
 Simulation is performed using `GOLContainer::run(self: &mut Self, step: usize, speed_milis: u64) -> ()`. To run a simulation of 20 steps with a refresh interval of 10ms, I write :
 `container.run(20, 10);`. If you want infinite steps, just set `step` to 0.
 
-<img src="assets/toig.gif" alt="Test" width="300">
+![test](assets/toig.gif)
 
 ### References
 - [Concept](https://fr.wikipedia.org/wiki/Jeu_de_la_vie)
