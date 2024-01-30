@@ -1,4 +1,4 @@
-### Z1DCellularAutomata
+### Z2DCellularAutomata
 Simple representation of a cellular automaton following the rules established by the game of life of Conway.
 
 ### Explanation
