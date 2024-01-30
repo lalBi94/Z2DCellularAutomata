@@ -21,7 +21,7 @@ Automata are governed by the [rules](https://fr.wikipedia.org/wiki/Jeu_de_la_vie
 fn get_info(of: Vec<(Neighbors, GOLCellularAutomata)>) -> (usize, usize);
 ```
 
-There are two solutions: use `push_line(line:Vec<State>, is_last: bool) -> ();` or write all the states (including the `Border state`) tediously.
+There are two solutions: use `GOLContainer::push_line(line:Vec<State>, is_last: bool) -> ();` or write all the states (including the `Border state`) tediously.
 
 1st option
 ```rust
