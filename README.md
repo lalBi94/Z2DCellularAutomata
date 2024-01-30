@@ -16,7 +16,7 @@ let neighbors: Vec<(Neighbors, GOLCellularAutomata)> = vec![
 ];
 ```
 
-Automata are governed by the [rules](https://fr.wikipedia.org/wiki/Jeu_de_la_vie#Règles) of the game of life.
+Automata are governed by the [rules](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Rules) of the game of life.
 ```rust
 fn get_info(of: Vec<(Neighbors, GOLCellularAutomata)>) -> (usize, usize);
 ```
@@ -53,7 +53,7 @@ Simulation is performed using `GOLContainer::run(self: &mut Self, step: usize, s
 <img src="assets/toig.gif" alt="Test" width="300">
 
 ### References
-- [Concept](https://fr.wikipedia.org/wiki/Jeu_de_la_vie)
+- [Concept](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
 ### Licence
 This project is licensed under the MIT License - see the LICENSE file for details.
