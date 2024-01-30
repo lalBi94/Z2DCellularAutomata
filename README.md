@@ -50,7 +50,7 @@ let list: Vec<Vec<State>> = vec![
 Simulation is performed using `GOLContainer::run(self: &mut Self, step: usize, speed_milis: u64) -> ()`. To run a simulation of 20 steps with a refresh interval of 10ms, I write :
 `container.run(20, 10);`. If you want infinite steps, just set `step` to 0.
 
-![test](assets/toig.gif)
+<img src="assets/toig.gif" alt="Test" width="300">
 
 ### References
 - [Concept](https://fr.wikipedia.org/wiki/Jeu_de_la_vie)
